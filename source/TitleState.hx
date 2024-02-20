@@ -25,7 +25,19 @@ import lime.app.Application;
 import openfl.Lib;
 import openfl.filters.BitmapFilter;
 import openfl.filters.ShaderFilter;
-
+VIRTUALPAD_RIGHT;
+			case 1: 
+				VIRTUALPAD_LEFT;
+			case 2: 
+				VIRTUALPAD_CUSTOM;
+			case 3: 
+				DUO;
+			case 4:	
+				HITBOX;
+			case 5: 
+				KEYBOARD;
+			default: 
+				VIRTUALPAD_RIGHT;
 using StringTools;
 #if desktop
 import Discord.DiscordClient;
@@ -201,7 +213,12 @@ class TitleState extends MusicBeatState {
 			hand.ID = i;
 			hands.push(hand);
 		}
-
+VIRTUALPAD_RIGHT;
+	VIRTUALPAD_LEFT;
+	VIRTUALPAD_CUSTOM;
+	DUO;
+	HITBOX;
+	KEYBOARD;
 		bf = new FlxSprite(303, 312);
 		bf.antialiasing = ClientPrefs.globalAntialiasing;
 		bf.frames = Paths.getSparrowAtlas("title/titleAssets");
@@ -211,6 +228,24 @@ class TitleState extends MusicBeatState {
 		bf.updateHitbox();
 		bottomGroup.add(bf);
 
+	public function new() {
+		save = new FlxSave();
+		save.bind("saved-controls");ode = getModeFromNumber(config.getcontrolmode());
+
+		switch (mode){
+			case VIRTUALPAD_RIGHT:
+				initControler(0);
+			case VIRTUALPAD_LEFT:
+				initControler(1);
+			case VIRTUALPAD_CUSTOM:
+				initControler(2);
+			case DUO:
+				initControler(3);
+			case HITBOX:
+		    if(ClientPrefs.data.hitboxmode != 'New'){
+				initControler(4);
+		    }else{
+		    initControler(5);
 		gf = new FlxSprite(705, 230);
 		gf.antialiasing = ClientPrefs.globalAntialiasing;
 		gf.frames = Paths.getSparrowAtlas("title/titleAssets");
@@ -414,7 +449,19 @@ class TitleState extends MusicBeatState {
 
 		super.update(elapsed);
 	}
-
+VIRTUALPAD_RIGHT;
+			case 1: 
+				VIRTUALPAD_LEFT;
+			case 2: 
+				VIRTUALPAD_CUSTOM;
+			case 3: 
+				DUO;
+			case 4:	
+				HITBOX;
+			case 5: 
+				KEYBOARD;
+			default: 
+				VIRTUALPAD_RIGHT;
 	function completeWindowTwn(){
 		FlxG.updateFramerate = ClientPrefs.framerate;
 		BaseScaleMode.ogSize = FlxPoint.get(1280, 720); // fuck you haxeflixel
